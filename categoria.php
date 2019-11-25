@@ -16,7 +16,7 @@ if(!isset($categoria_actual['id'])){
     <h1>Entradas de <?=$categoria_actual['nombre'];?></h1>
 
     <?php
-        $entradas = conseguirUltimasEntradas($db, null);
+        $entradas = conseguirUltimasEntradas($db, null, $categoria_actual['id']);
         while(!empty($entradas) && $entrada= mysqli_fetch_assoc($entradas)):
     ?>
 
@@ -35,6 +35,9 @@ if(!isset($categoria_actual['id'])){
         </a>
     </article>
     <?php endwhile; ?>
+    <?php if(mysqli_num_rows($entradas) < 1): ?>
+    <div class="alerta">No hay entradas en esta categoría</div>
+    <?php endif; ?>
 
 
 </div> <!-- fin principal -->

@@ -59,10 +59,16 @@ function conseguirUnaCategoria($conexion, $id){
 
 
 /* Por defecto sera cuatro. Null para traer todas las entradas */
-function conseguirUltimasEntradas($conexion, $limit = 'LIMIT 4'){
+function conseguirUltimasEntradas($conexion, $limit = 'LIMIT 4', $categoria = null){
     $sql = "SELECT e.*, c.nombre AS 'categoria' FROM entradas e ".
-        "INNER JOIN categorias c ON E.categoria_id = c.id ".
-        "ORDER BY e.id DESC ";
+        "INNER JOIN categorias c ON E.categoria_id = c.id ";
+        
+    
+    if(!empty($categoria)){
+        $sql .= "WHERE e.categoria_id = '$categoria' ";
+    }
+    
+    $sql .= "ORDER BY e.id DESC ";
     
     if($limit){
         $sql .= $limit;
