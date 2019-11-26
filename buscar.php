@@ -1,14 +1,19 @@
+<?php
+if(!isset($_POST['busqueda'])){
+    header('Location.index.php');
+}
+
+?>
 <?php require_once 'includes/cabecera.php'; ?>
 
-
 <?php require_once 'includes/lateral.php'; ?>
-
+b
 <!-- CAJA PRINCIPAL -->
 <div id="principal">
-    <h1>Últimas entradas</h1>
+    <h1>Busqueda:  <?=$_POST['busqueda'];?></h1>
 
     <?php
-        $entradas = conseguirUltimasEntradas($db);
+        $entradas = conseguirUltimasEntradas($db, null, null, $_POST['busqueda']);
         while(!empty($entradas) && $entrada= mysqli_fetch_assoc($entradas)):
     ?>
 
@@ -27,11 +32,11 @@
         </a>
     </article>
     <?php endwhile; ?>
+    <?php if(mysqli_num_rows($entradas) < 1): ?>
+    <div class="alerta">No hay entradas en esta categoría</div>
+    <?php endif; ?>
 
 
-    <div id="ver-todas">
-        <a href="entradas.php">Ver todas las entradas</a>
-    </div>
 </div> <!-- fin principal -->
 
 

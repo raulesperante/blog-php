@@ -176,6 +176,7 @@ input[type="submit"],
 }
 
 .boton{
+    color: white !important;
     width: 130px;
     text-align: center;
 }
